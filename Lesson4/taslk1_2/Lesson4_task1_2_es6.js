@@ -1,19 +1,33 @@
 "use strict"
 
-class Product {
-    constructor(name, price) {
-        this.name = name;
-        this.price = price;
+class Post {
+    constructor(author, text, date) {
+        this.author = author;
+        this.text = text;
+        this.date = date;
     }
 
-    make25PercentDiscount() {
-        this.price = this.price - this.price * (25 / 100);
+    edit(text) {
+        this.text = text;
     }
 }
 
-let prod1 = new Product("Яблоко", 25)
+class AttachedPost extends Post {
+    constructor(author, text, date) {
+        super(author, text, date);
+        this.highlighted = false;
+    }
 
-console.log(prod1.name)
-console.log(prod1.price)
-prod1.make25PercentDiscount()
-console.log(prod1.price)
+    makeTextHighlighted() {
+        this.highlighted = true;
+    }
+
+}
+
+let post1 = new Post("Эрнест Хемингуэй", "Айда на Первую Мировую ", "1918 ")
+
+let post2 = new AttachedPost("Эрнест Хемингуэй", "Айда на 'Гражданку' в Испании", "1937 ")
+
+post2.makeTextHighlighted()
+post2.edit("Айда топить подлодки фашистов")
+console.log(post2.text)
